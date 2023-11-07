@@ -30,9 +30,5 @@ if(rescode == 200):
     print(title)
 else:
     print('Error Code:' + rescode)
-#안녕하세요
-#안녕하세요2
-#ABCD
 
-# This is a example code
 
