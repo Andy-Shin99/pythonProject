@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
+import time
 
 #selenium 창 꺼짐 방지 
 chrome_options = Options()
@@ -35,7 +36,9 @@ for period in period_list :
     browser.find_element(By.XPATH, '//*[@id="search_end_date"]').send_keys(Keys.ENTER)
 
     browser.find_element(By.XPATH, '//*[@id="periodSearch"]').click()
-    browser.implicitly_wait(2)
+
+    time.sleep(1)
+
     html = browser.page_source 
     soup = BeautifulSoup(html, 'html.parser')
     post = soup.select('.desc')[2:]
