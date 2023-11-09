@@ -19,6 +19,7 @@ prev_height = driver.execute_script("return document.body.scrollHeight")
 # 최초 창에 나타나는 게시글 개수
 count = 30
 
+# TODO : count 개수 설정
 while count < 210:
     print(count)
 
@@ -54,3 +55,5 @@ for des_tag in des_tag_list:
 
 print(len(title_list), title_list)
 print(len(des_list), des_list)
+
+# TODO : csv 파일로 저장
