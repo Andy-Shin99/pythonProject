@@ -10,50 +10,63 @@ import time
 driver = webdriver.Chrome(service= Service(ChromeDriverManager().install()))
 driver.maximize_window()
 
-# TODO : url 조작(기간 조정)
-url = 'https://search.naver.com/search.naver?where=blog&query=%EC%97%AC%ED%96%89&sm=tab_opt&nso=so:r,p:from20230101to20231109'
-driver.get(url)
+# url 조작(기간 조정)
+duration_list = ['20160101to20161231', '20170101to20171231', '20180101to20181231', '20190101to20191231', '20200101to20201231', '20210101to20211231', '20220101to20221231', '20230101to20231110']
 
-prev_height = driver.execute_script("return document.body.scrollHeight")
+base_url = 'https://search.naver.com/search.naver?where=blog&query=%EC%97%AC%ED%96%89&sm=tab_opt&nso=so:r,p:from'
 
-# 최초 창에 나타나는 게시글 개수
-count = 30
+# post 제목, desc 저장할 dict type 변수
+post_dict = {}
 
-# TODO : count 개수 설정
-while count < 210:
-    print(count)
+for duration in duration_list:
+    url = base_url + duration
 
-    # 스크롤을 화면 가장 아래로 내린다
-    driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+    driver.get(url)
 
-    # 페이지 로딩 대기
-    time.sleep(2)
+    prev_height = driver.execute_script("return document.body.scrollHeight")
 
-    # 현재 문서 높이를 가져와서 저장
-    # curr_height = driver.execute_script("return document.body.scrollHeight")
+    # 최초 창에 나타나는 게시글 개수
+    count = 30
 
-    # 스크롤 시 추가 30개 게시글 로딩, 개수 추가
-    count += 30
+    while count <= 1020:
+        # 스크롤을 화면 가장 아래로 내린다
+        driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+
+        # 페이지 로딩 대기
+        time.sleep(2)
+
+        # 현재 문서 높이를 가져와서 저장
+        # curr_height = driver.execute_script("return document.body.scrollHeight")
+
+        # 스크롤 시 추가 30개 게시글 로딩, 개수 추가
+        count += 30
 
 
-html = driver.page_source
-soup = BeautifulSoup(html, 'html.parser')
-title_tag_list = soup.select('.lst_view > .bx > .view_wrap > .detail_box > .title_area > a')
-des_tag_list = soup.select('.lst_view > .bx > .view_wrap > .detail_box > .dsc_area > a')
+    html = driver.page_source
+    soup = BeautifulSoup(html, 'html.parser')
+    title_tag_list = soup.select('.lst_view > .bx > .view_wrap > .detail_box > .title_area > a')
+    des_tag_list = soup.select('.lst_view > .bx > .view_wrap > .detail_box > .dsc_area > a')
 
-# title_tag_list의 a 태그 사이에 있는 content만 뽑아내기
-title_list = []
-des_list = []
+    # title_tag_list의 a 태그 사이에 있는 content만 뽑아내기
+    title_list = []
+    des_list = []
 
-# title_tag_list의 a 태그 사이에 있는 content만 뽑아내기
-for title_tag in title_tag_list:
-    title_list.append(title_tag.text)
+    # title_tag_list의 a 태그 사이에 있는 content만 뽑아내기
+    for title_tag in title_tag_list:
+        title_list.append(title_tag.text)
 
-# des_tag_list의 a 태그 사이에 있는 content만 뽑아내기
-for des_tag in des_tag_list:
-    des_list.append(des_tag.text)
+    # des_tag_list의 a 태그 사이에 있는 content만 뽑아내기
+    for des_tag in des_tag_list:
+        des_list.append(des_tag.text)
 
-print(len(title_list), title_list)
-print(len(des_list), des_list)
+    # post_dict에 저장
+    post_dict[duration] = {'title': title_list, 'description': des_list}
 
-# TODO : csv 파일로 저장
+# csv 파일로 저장
+import pandas as pd
+
+df = pd.DataFrame(post_dict)
+# 행과 열을 바꾸기
+df = df.transpose()
+
+df.to_csv('post_datas.csv', encoding='utf-8-sig')
