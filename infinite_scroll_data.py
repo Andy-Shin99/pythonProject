@@ -35,9 +35,6 @@ for duration in duration_list:
         # 페이지 로딩 대기
         time.sleep(2)
 
-        # 현재 문서 높이를 가져와서 저장
-        # curr_height = driver.execute_script("return document.body.scrollHeight")
-
         # 스크롤 시 추가 30개 게시글 로딩, 개수 추가
         count += 30
 
