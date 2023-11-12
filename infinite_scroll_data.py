@@ -48,25 +48,27 @@ for duration in duration_list:
     des_tag_list = soup.select('.lst_view > .bx > .view_wrap > .detail_box > .dsc_area > a')
 
     # title_tag_list의 a 태그 사이에 있는 content만 뽑아내기
-    title_list = []
-    des_list = []
+    filename = str(duration) + '.txt'
+    f = open(filename, 'w', encoding='utf-8')
 
     # title_tag_list의 a 태그 사이에 있는 content만 뽑아내기
     for title_tag in title_tag_list:
-        title_list.append(title_tag.text)
+        f.write(title_tag.text+ '\n')
 
     # des_tag_list의 a 태그 사이에 있는 content만 뽑아내기
     for des_tag in des_tag_list:
-        des_list.append(des_tag.text)
+        f.write(des_tag.text[:-4] + '\n')
+
+    f.close()
 
     # post_dict에 저장
-    post_dict[duration] = {'title': title_list, 'description': des_list}
+#    post_dict[duration] = {'title': title_list, 'description': des_list}
 
 # csv 파일로 저장
-import pandas as pd
+#import pandas as pd
 
-df = pd.DataFrame(post_dict)
+#df = pd.DataFrame(post_dict)
 # 행과 열을 바꾸기
-df = df.transpose()
+#df = df.transpose()
 
-df.to_csv('post_datas.csv', encoding='utf-8-sig')
+#df.to_csv('post_datas.csv', encoding='utf-8-sig')
