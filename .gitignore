@@ -4,3 +4,6 @@
 *.ipr
 
 .env
+
+*.pyc
+__pycache__/
