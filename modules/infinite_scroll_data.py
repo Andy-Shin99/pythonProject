@@ -48,7 +48,7 @@ for duration in duration_list:
     des_tag_list = soup.select('.lst_view > .bx > .view_wrap > .detail_box > .dsc_area > a')
 
     # title_tag_list의 a 태그 사이에 있는 content만 뽑아내기
-    filename = str(duration) + '.txt'
+    filename = 'corpus_data//' + str(duration) + '.txt'
     f = open(filename, 'w', encoding='utf-8')
 
     # title_tag_list의 a 태그 사이에 있는 content만 뽑아내기
