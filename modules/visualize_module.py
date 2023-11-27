@@ -2,6 +2,7 @@ import pandas as pd
 import re
 from matplotlib import rc
 import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
 ## todo : title 부분은 표로 만들기 (연도별 표로 찍기)
 for i in range(2016, 2024):
@@ -64,6 +65,12 @@ for i in range(2016, 2024):
 
     plt.show()
 
-## todo : des 부분 워드클라우드 만들기
+    ## todo : des 부분 워드클라우드 만들기
+    wc = df.set_index('Keyword').to_dict()['Count']
+    wordCloud = WordCloud(font_path='AppleGothic', background_color='white', width=800, height=600).generate_from_frequencies(wc)
+
+    plt.figure()
+    plt.imshow(wordCloud)
+    plt.axis('off')
 
 ## todo : 선그래프로 연도별로 어떤 여행지가 인기 있었는지 그리기 -> 2016~2023년까지 전체를 더한거
