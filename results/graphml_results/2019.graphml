@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlnshttp://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d1" for="edge" attr.name="weight" attr.type="double"/><key id="d0" for="node" attr.name="label" attr.type="string"/><graph id="Entity" edgedefault="undirected">
+<node id="1">
+<data key="d0">우</data>
+</node><node id="2">
+<data key="d0">지경</data>
+</node><node id="3">
+<data key="d0">경비</data>
+</node><node id="4">
+<data key="d0">일정</data>
+</node><node id="5">
+<data key="d0">한잔</data>
+</node><node id="6">
+<data key="d0">다낭</data>
+</node><node id="7">
+<data key="d0">베트남</data>
+</node><node id="8">
+<data key="d0">방콕</data>
+</node><node id="9">
+<data key="d0">태국</data>
+</node><node id="10">
+<data key="d0">런던</data>
+</node><node id="11">
+<data key="d0">영국</data>
+</node><node id="12">
+<data key="d0">사항</data>
+</node><node id="13">
+<data key="d0">주의</data>
+</node><node id="14">
+<data key="d0">짐</data>
+</node><node id="15">
+<data key="d0">체크</data>
+</node><node id="16">
+<data key="d0">시드니</data>
+</node><node id="17">
+<data key="d0">호주</data>
+</node><node id="18">
+<data key="d0">유럽</data>
+</node><node id="19">
+<data key="d0">혼자</data>
+</node><edge source="1" target="2">
+<data key="d1">10</data>
+</edge><edge source="3" target="4">
+<data key="d1">7</data>
+</edge><edge source="1" target="5">
+<data key="d1">7</data>
+</edge><edge source="2" target="5">
+<data key="d1">7</data>
+</edge><edge source="6" target="7">
+<data key="d1">7</data>
+</edge><edge source="8" target="9">
+<data key="d1">6</data>
+</edge><edge source="10" target="11">
+<data key="d1">6</data>
+</edge><edge source="12" target="13">
+<data key="d1">5</data>
+</edge><edge source="14" target="15">
+<data key="d1">5</data>
+</edge><edge source="16" target="17">
+<data key="d1">5</data>
+</edge><edge source="18" target="19">
+<data key="d1">5</data>
+</edge></graph> </graphml>
