@@ -28,22 +28,42 @@ for i in range(2016, 2024):
     # index를 1부터 시작하게 만들기
     title_df.index = title_df.index + 1
 
-    # 결과 DataFrame 출력
-    print(title_df)
-
     # 결과 DataFrame 저장
     title_df.to_csv(f'../results/title_dataframes/{i}.csv', sep='\t', index=True)
 
-## todo : des 부분은 그래프로 만들기 (맨 처음 여행은 빼고), 워드클라우드 만들기
-# for i in range(2016, 2024):
-#     des_df = pd.read_table(f'../results/des_results/{i}.txt', sep=' ',header=None, names=['des', 'num'])
-#
-#     ## todo : 차트 그리기
-#     # plt.figure(num=None, figsize=(8, 6), dpi=80, facecolor='w', edgecolor='k')
-#     # plt.rcParams.update({'font.size': 8})
-#     rc('font', family='AppleGothic')
-#
-#     des_df.plot(kind='bar', x='des', y='num', legend=True)
-#     plt.show()
+## todo : des 부분 그래프로 만들기 (맨 처음 여행은 빼고), 워드클라우드 만들기
+for i in range(2016, 2024):
+    file_path = f'../results/des_results/{i}.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+
+    # 불러온 데이터 처리
+    data = {}
+    for line in lines:
+        line = line.strip()
+        key_value = line.split(' ')
+        key = key_value[0]
+        value = int(key_value[1])
+        data[key] = value
+
+    # 데이터를 DataFrame으로 변환
+    df = pd.DataFrame(list(data.items()), columns=['Keyword', 'Count'])
+
+    # '여행' 키워드를 제외하고 상위 20개 키워드로 DataFrame 생성
+    des_df = df[df['Keyword'] != '여행'].head(20)
+
+    # 내림차순으로 데이터 정렬
+    des_df = des_df.sort_values(by=['Count'], ascending=False)
+
+    ## todo : 차트 그리기
+    rc('font', family='AppleGothic')
+    plt.figure(num=None, figsize=(8, 6), dpi=80, facecolor='w', edgecolor='k')
+    plt.rcParams.update({'font.size': 10})
+    plt.barh(des_df['Keyword'], des_df['Count'],height=0.5)
+    plt.title(f'{i}년도 상위 20개 여행 키워드')
+
+    plt.show()
+
+## todo : des 부분 워드클라우드 만들기
 
 ## todo : 선그래프로 연도별로 어떤 여행지가 인기 있었는지 그리기 -> 2016~2023년까지 전체를 더한거
